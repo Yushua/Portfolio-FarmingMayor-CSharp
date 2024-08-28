@@ -1,0 +1,151 @@
+Farming Mayor,
+
+you recide over a small village with
+- farm
+{
+    for example, the Farmer will them buy, rake,seed and water the farm each day untill it sprouts.
+    seed takes moments, each day is 24, and it takes X moments for a plant to go to the next stage. for example
+    a simple Turnip takes 96 moments, or 4 days to sprout.
+
+    after growing, its taken and put in the box, where then the task is complete. the farmer gains momey on the task AND
+    THE items sold that were put in.
+
+    each task can only be made by the shop owner. who sells the seed. at the start you only have 5 Turnip seeds, so you can only
+    make one task. but those tasks gains you money. money you can use to order more seeds, more seeds mean better tasks. and the farmer
+    a bigger yield.
+
+    it is not supposed to be... complex, the point of this si how the farmer is going to walk, act, etc.
+}
+- woodcutter
+{
+    Woodcutter tasks are simple, you need wood, HOWEVER, instead of you getting seed, you PAY for the wood. 
+    for example
+
+    you put out a task of 20 wood, each wood is 20 pieces of gold, meaning you need to put in 400 gold for the wood.
+    however, that wood can then be sold to the farmer or blacksmith if they need it. the farmer to build new tools, the blacksmith
+    to create better tools, which the farmer can make
+}
+- shop
+{
+    this is where you get in, you create tasks for the NPC's, which help you with the system
+
+    tasks => money => resources => better tools => more profit better tasks => tasks
+
+    this is the loop you go through, but make no mistake, there are some issues. for one. 
+}
+- blacksmith
+{
+    blacksmiths do one thing. they rather resources and perform actions
+    - gather ore.
+    - create items.
+
+    
+}
+
+so whats the catch 
+{
+    each action takes time. one can only cut so much wood per day.
+    one only has so much stamina. a way to counter it is leveling up. each stmaina point is exp, by
+    using an exponential calculation one gains levels, and therefore gain more stamina.
+
+    stmaina can be increased, time isn't. thsi is why there is a rift, do you take the more expesnive yield, less
+    time to plant, more chance of a bad harvest. or do you spend your time doing with lesser wiht a slight chance of a miscarrage
+
+    blacksmiths and woodcutter also take time doing an action. there are
+
+    also so many trees one can cut, they regrow in X days.
+
+    there are so many ores, those respawn in X days.
+}
+
+the challenges
+{
+
+    a map where one sees these three walk around and perform these actions
+
+    {
+        the map is a 2D grid based game.
+    }
+    {
+        each character has their own unique character roll. they eprform independant of one another.
+        their choices based on their actions.
+    }
+    {
+        the way they move about. this is going to be the big challenge, whats the logic behind this and how
+        will it perform. a simple way is that the farmer thinks in these steps.
+
+        1 => {
+            it goes out to the farm and waters the plants.
+        }
+        2 => {
+            it calculates how many seeds it can plant (based on the tasks it has) and buys them and plants them
+        }
+        3 => {
+            if they planted enough seeds AND their limit of tasks is not reached, they will go back and find another task.
+
+            again, it ONLY gets a new task if either the DISTANCE to get there takes too long before bed, OR if they have not finished the yield OR if their
+            tasks are at a limit.
+
+            tasks are always given with the seeds. so one cannot do it without.
+
+            each will be a simple function to check out.
+        }
+        4 => {
+            each task is calculated underneath with how much stamina it is going to take divided by how muhc money it is going to make
+            with the reward NOT the crops itself.
+
+            for example, if it takes 100 stamina and 100 coins, it means its a 1. while 100 stamina and 200 coins means 2. so 2 wins
+        }
+        5 => {
+            if any tasks given is already fullfilled party. for example. one has a task of 10 potatoes, but you already stored 5 of them. then
+            a more complex caluclation need to be made.
+
+            the farmer does not know what tasks are there until they're there.
+        }
+
+        why like this? its a node system that resets each day, this way it doens't check EVERYTHING, only the things NEEDED.
+
+        there is a way to get softlocked. so what needs ot be tested is the price. the price for seed can change in future updates?
+        whats important is that you set the price for the seed. a task is BOUGHT by coins. but the reward should always be better.
+
+        there is one issue, what if you give him 10 seeds but only 9 sprout? thats up to you. you give him seeds and the amount,
+        but the amount he needs to return can be less
+
+        tasks given
+
+        Seed amount
+        given amount
+        task reward
+
+        that is it.
+
+        taks can give multiple seeds and amounts, however, the farmer only gains money AFTER it is planted.
+
+        you cna make taks without any seed at all, JUST to see the yield.
+
+        crops 
+        {
+            while crops have a chance to fail, they also have a chance to double or even tripple
+
+            lets say
+
+            1/14
+            1/54
+
+            each crop has a stage, its only by the FIRST stage they check if it failed.
+            with more expensive crops its in the first and second stage.
+        }
+
+    }
+}
+- (and future additions)
+
+events
+{
+    Crops have a chance, depending on the crop, of a bad yield. a low level crop may give you less, but the
+    chance of failure is less than a more expensive crop.
+}
+
+you reside over the Shop. you were send by the capital to grow the village, your job is
+
+- to make orders, like quests, the farmer, woodcutter or the smith will deal with said quest.
